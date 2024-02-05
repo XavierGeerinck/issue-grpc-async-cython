@@ -6,6 +6,9 @@
 # Build Proto
 python -m grpc_tools.protoc -I./protos --python_out=./greeter --grpc_python_out=./greeter ./protos/helloworld.proto
 
+# Update `greeter/helloworld_pb2_grpc.py` to update `import helloworld_pb2 as helloworld__pb2` to `import greeter.helloworld_pb2 as helloworld__pb2`
+sed -i 's/import helloworld_pb2 as helloworld__pb2/import greeter.helloworld_pb2 as helloworld__pb2/g' greeter/helloworld_pb2_grpc.py
+
 # Cythonize
 python setup.py build_ext --inplace
 
